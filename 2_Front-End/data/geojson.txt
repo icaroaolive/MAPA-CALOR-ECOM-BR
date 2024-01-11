@@ -1,0 +1,2 @@
+Antes ele baixou um arquivo  que foi gerado por um site  onde ele desenlhou os poligonos.
+https://geojson.io/#map=10.51/-27.1171/-52.6151

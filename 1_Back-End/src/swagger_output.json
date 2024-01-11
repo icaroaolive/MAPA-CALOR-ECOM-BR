@@ -1,0 +1,159 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/buscarTodos": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/buscaEndereco/{endereco}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "endereco",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/buscarPorNumero/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pessoas": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/novapessoa": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "dtnascimento": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "bairro": {
+                  "example": "any"
+                },
+                "municipio": {
+                  "example": "any"
+                },
+                "naturalidade": {
+                  "example": "any"
+                },
+                "sexo": {
+                  "example": "any"
+                },
+                "profissao": {
+                  "example": "any"
+                },
+                "vulnerabilidade_social": {
+                  "example": "any"
+                },
+                "escolaridade": {
+                  "example": "any"
+                },
+                "estado_civil": {
+                  "example": "any"
+                },
+                "nro_pessoas_familia": {
+                  "example": "any"
+                },
+                "idosos_quantos": {
+                  "example": "any"
+                },
+                "tem_cadeirante": {
+                  "example": "any"
+                },
+                "tem_neces_visual": {
+                  "example": "any"
+                },
+                "tem_nanismo": {
+                  "example": "any"
+                },
+                "gps_latitude": {
+                  "example": "any"
+                },
+                "gps_longitude": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

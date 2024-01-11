@@ -1,0 +1,111 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ADDRESS MONITOR API # E-COMBR",
+    "version": "1.3.9",
+    "description": "Address Monitor é uma API de retorno de informações de endereço com suporte à conexão de banco de dados. Sua funcionalidade é necessária para a emissão de relatórios usando o E-COMBR - HeatmapBR, uma view personalizada produzida em parceria com a BRISA e UNOESC e pesquisadores: Douglas Rezende, Matheus Ribak, Icaro A. Oliveira, Sara Moura. "
+  },
+  "paths": {
+    "/buscarTodos": {
+      "get": {
+        "tags": [
+          "Endereços"
+        ],
+        "summary": "Obter todos os endereços cadastrados na base de dados.",
+        "responses": {
+          "200": {
+            "description": "Lista de endereços",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ENDERECO": {
+                    "type": "string",
+                    "description": "Endereço da pessoa"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/buscaEndereco/{endereco}": {
+      "get": {
+        "tags": [
+          "Endereços"
+        ],
+        "summary": "Efetua a busca do endereço por logradouro.",
+        "parameters": [
+          {
+            "name": "endereco",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endereço encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enderecoEncontrado": {
+                  "type": "integer",
+                  "description": ""
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Endereço não encontrado"
+          }
+        }
+      }
+    },
+    "/buscarPorNumero/{numero}": {
+      "get": {
+        "tags": [
+          "Auxiliares"
+        ],
+        "summary": "Efetua a busca de endereço pelo número procurando por nº {numero}.",
+        "parameters": [
+          {
+            "name": "numero",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Número encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "numerosEncontrados": {
+                  "type": "integer",
+                  "description": ""
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Número não encontrado"
+          }
+        }
+      }
+   
+   
+              
+            
+          },
+          "404": {
+            "description": "Não foram encontrados registros."
+          }
+        }
+      }
+    
+  

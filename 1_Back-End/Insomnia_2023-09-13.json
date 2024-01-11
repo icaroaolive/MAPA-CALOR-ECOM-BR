@@ -1,0 +1,194 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-09-13T18:58:47.899Z",
+    "__export_source": "insomnia.desktop.app:v2023.5.8",
+    "resources": [
+        {
+            "_id": "req_15f7956793ae42e8ab5a02604f77f950",
+            "parentId": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "modified": 1694631013284,
+            "created": 1694630709919,
+            "url": "http://localhost:3333/pessoas",
+            "name": "getAll.Pessoas",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1694630709919,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "parentId": null,
+            "modified": 1694539890130,
+            "created": 1694539364187,
+            "name": "ApiNodeJS",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_1b542a8b7b2b442aa93d979de7565309",
+            "parentId": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "modified": 1694631097369,
+            "created": 1694627144841,
+            "url": "http://localhost:3333/novapessoa/",
+            "name": "post.NovaPessoa",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"id\": \"964\",\n  \"nome\": \"Nome\",\n  \"cpf\": \"123.456.789-00\",\n  \"endereco\": \"Endereço da Pessoa\",\n  \"bairro\": \"Bairro da Pessoa\",\n  \"municipio\": \"Município da Pessoa\",\n  \"naturalidade\": \"Naturalidade da Pessoa\",\n  \"sexo\": \"M\",\n  \"profissao\": \"Profissão\",\n  \"vulnerabilidade_social\": \"S\",\n  \"escolaridade\": \"Superior\",\n  \"estado_civil\": \"Solteiro(a)\",\n  \"nro_pessoas_familia\": 4,\n  \"idosos_quantos\": 2,\n  \"tem_cadeirante\": \"S\",\n  \"tem_neces_visual\": \"S\",\n  \"tem_nanismo\": \"S\",\n  \"gps_latitude\": 123.456789,\n  \"gps_longitude\": -12.345678\n}\n"
+            },
+            "parameters": [
+                {
+                    "id": "pair_57c2f36729244b568c04b582d90cc2f7",
+                    "name": "",
+                    "value": "",
+                    "description": ""
+                }
+            ],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1694627144841,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_e72f3288fd1d4dd0874e8d2760b33905",
+            "parentId": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "modified": 1694627141655,
+            "created": 1694616254913,
+            "url": "http://localhost:3333/endereco/'RUA ANA MATOS - n° 50'",
+            "name": "getBy.Endereco",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1694616254913,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_8ba63d9768db40c298d8b96b3aaacfd6",
+            "parentId": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "modified": 1694616252837,
+            "created": 1694615864760,
+            "url": "http://localhost:3333/endereco/14464",
+            "name": "getForID.Enderecos",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1694615864760,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_61f58e788da14b2d9a1f33c9a8ce437d",
+            "parentId": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "modified": 1694616235239,
+            "created": 1694539905330,
+            "url": "http://localhost:3333/endereco",
+            "name": "getAll.Enderecos",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1694539905330,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_efaf4eef4bef379e595961da6d68bcd5efbb6851",
+            "parentId": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "modified": 1694539364195,
+            "created": 1694539364195,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1694539364195,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_efaf4eef4bef379e595961da6d68bcd5efbb6851",
+            "parentId": "wrk_89b58ae89a454147a89c8475e2055f46",
+            "modified": 1694539364198,
+            "created": 1694539364198,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        }
+    ]
+}
