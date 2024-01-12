@@ -1,7 +1,7 @@
 //CONFIGURAÇÕES
 const host = "" //host da API
 const porta = "" //porta da API
-const schema = "" //determia o schema do postgres para auxiliar em consultas globais
+const schema = "" //determina o schema do postgres para auxiliar em consultas globais
 const tabela = "" //determina a tabela de onde os filtros serão montados
 const key = "" //usado como salt na API para não ser explorado como vulnerabilidade
 const coordenada_padrao_mapa = [-5855349.118211474, -3140369.6419760953] //Posicionamento padrão do mapa quando criada a visualização em tela.
