@@ -299,7 +299,7 @@ function montaPontosLatLong(pessoa) {
     const jsonData = {
         type: "Feature",
         properties: {
-            weight: 0.3
+            weight: 0.1
         },
         geometry: {
             coordinates: [lon, lat],
