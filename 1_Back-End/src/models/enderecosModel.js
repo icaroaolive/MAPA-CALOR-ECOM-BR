@@ -1,8 +1,8 @@
 const connection = require('./connection')
 const axios = require('axios')
 
-var key = '' // SALT da API (Usado para ter permissão ao rodar os métodos de busca ou inserção)
-const tabela = '' // Tabela a ser utilizada
+var key = '' // SALT da API (Usado para ter permissão ao rodar os métodos de busca ou inserção).
+const tabela = '' // Tabela a ser utilizada.
 var urlapi = 'https://nominatim.openstreetmap.org' //Endereço da API que fará a correção dos endereços não colocar / no final.
 var tempoConsulta = 1250 //Intervalo em milisegundos para utilização da API gratuita.
 
