@@ -3,6 +3,9 @@ const axios = require('axios')
 
 var key = '' // SALT da API (Usado para ter permissão ao rodar os métodos de busca ou inserção)
 const tabela = '' // Tabela a ser utilizada
+var urlapi = 'https://nominatim.openstreetmap.org' //Endereço da API que fará a correção dos endereços não colocar / no final.
+var tempoConsulta = 2000 //Intervalo em milisegundos para utilização da API gratuita.
+
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -43,11 +46,11 @@ const corrigirEnderecos = async (enderecos, pass) => {
       console.log('Solicitação de Correção para: ' + enderecos.length + ' registros. \n')
 
       for (let i = 0; i <= enderecos.length; i++) {
-        await delay(2000)
+        await delay(tempoConsulta)
 
 
         console.log("(" + i + "/" + enderecos.length + ")" + " - " + enderecos[i].nome + " - " + enderecos[i].endereco + " - " + enderecos[i].gps_latitude + ", " + enderecos[i].gps_longitude + "")
-        var dados = corrigeEnderecos(`https://nominatim.openstreetmap.org/search?format=json&q=${enderecos[i].endereco} ${enderecos[i].bairro} ${enderecos[i].municipio}`)
+        var dados = corrigeEnderecos(`${urlapi}/search?format=json&q=${enderecos[i].endereco} ${enderecos[i].bairro} ${enderecos[i].municipio}`)
 
         console.log("Correção a ser Aplicada: Lat: " + dados[0] + ", Lon: " + dados[1])
 
