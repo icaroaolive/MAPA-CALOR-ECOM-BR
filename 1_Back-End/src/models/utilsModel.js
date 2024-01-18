@@ -1,3 +1,4 @@
+//Faz parte dos métodos utilitários, serve para buscar endereços pelo número, não é usado no projeto.
 const connection = require('./connection');
 const tabela = '' // Tabela a ser utilizada
 
