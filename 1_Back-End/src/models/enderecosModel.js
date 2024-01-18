@@ -6,13 +6,15 @@ const tabela = '' // Tabela a ser utilizada.
 var urlapi = 'https://nominatim.openstreetmap.org' //Endereço da API que fará a correção dos endereços não colocar / no final.
 var tempoConsulta = 1250 //Intervalo em milisegundos para utilização da API gratuita.
 
-
+// Cria método para delay utilizando-se de uma promessa que espera a quantidade de milisegundos até ser resolvida.
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
+// inicializa variável para armazenar os dados do json para consulta dos endereços.
 var dados = []
 dados[0] = '0'
 dados[1] = '0'
 
+//função de correção dos endereços, recebe a URL e executa tarefa assíncrona no banco
 function corrigeEnderecos(url) {
   axios.get(url).then(resposta => {
 
@@ -22,7 +24,8 @@ function corrigeEnderecos(url) {
     console.log('Resposta Status: ' + resposta.status + "\n")
 
     const enderecos = resposta.data
-
+    
+    //Para cada endereco na lista de endereços faça:
     for (endereco of enderecos) {
       //console.log(`Encontrado endereco com latitude: ${endereco.lat}, longitude: ${endereco.lon}`)
 
@@ -40,20 +43,23 @@ function corrigeEnderecos(url) {
   return dados
 }
 
+//Complementação do método corrigeEndereco, recebe o endereço e a chave da API para executar o método
 const corrigirEnderecos = async (enderecos, pass) => {
   if (pass == key) {
     try {
       console.log('Solicitação de Correção para: ' + enderecos.length + ' registros. \n')
-
+      //Para i até a quantidade de enderecos faça:
       for (let i = 0; i <= enderecos.length; i++) {
         await delay(tempoConsulta)
 
-
+        //Retorno visual do que foi encontrado no banco de endereço
         console.log("(" + i + "/" + enderecos.length + ")" + " - " + enderecos[i].nome + " - " + enderecos[i].endereco + " - " + enderecos[i].gps_latitude + ", " + enderecos[i].gps_longitude + "")
+        // Executa a correção singular de cadastros para o registro encontrado no banco de dados que não possui latitude e longitude, com base no endereço.
         var dados = corrigeEnderecos(`${urlapi}/search?format=json&q=${enderecos[i].endereco} ${enderecos[i].bairro} ${enderecos[i].municipio}`)
-
+        //Retorno visual no console do que será aplicado no banco de dados.
         console.log("Correção a ser Aplicada: Lat: " + dados[0] + ", Lon: " + dados[1])
 
+        //Esse try vai tentar adicionar a Query no banco, e caso falhe, vai pular para o próximo registro.
         try {
           if (dados[0] != '0' && dados[1] != 0) {
             const { query } = await connection.query(`UPDATE ${tabela} SET gps_latitude='${dados[0]}', gps_longitude='${dados[1]}' WHERE id = '${enderecos[i].id}'                                        `)
@@ -81,7 +87,7 @@ const corrigirEnderecos = async (enderecos, pass) => {
 }
 
 
-
+//Método que busca todos os endereços e filtra por quais não possuem latitude e longitude.
 const buscarTodosFiltrarLatLong = async () => {
   try {
     const { rows } = await connection.query(`select * from  ${tabela} WHERE gps_latitude <> '' AND gps_longitude <> '' OR gps_latitude IS NOT NULL AND gps_longitude IS NOT NULL`)
@@ -96,6 +102,7 @@ const buscarTodosFiltrarLatLong = async () => {
   }
 }
 
+// Utilizado para criar o retorno visual no Front-end dos percentuais de correção da base.
 const criarEstatisticas = async () => {
 
   try {
@@ -115,6 +122,7 @@ const criarEstatisticas = async () => {
   }
 }
 
+//Método de pesquisa no banco de dados compatível com o filtro dinâmico de tabelas do schema.
 const buscarFiltro = async (consulta, pass) => {
   try {
     if (pass == key) {
@@ -136,6 +144,8 @@ const buscarFiltro = async (consulta, pass) => {
     //throw error
   }
 }
+
+//Método de busca para todos os registros sem latitude e longitude.
 const buscarTodosSemLatLong = async () => {
   try {
 
