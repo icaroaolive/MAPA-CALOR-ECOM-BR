@@ -23,11 +23,13 @@ function retornaColunas(selectAlvo) {
     xhttp.send()
 }
 
+//Declaração de variáveis para callback na interface dos dados estatísticos da base
 
 var label_totalconsist = document.getElementById('totalconsist')
 var label_totalregis = document.getElementById('totalregis')
 var label_consistencia = document.getElementById('consistencia')
 
+//Cria função assíncrona de nutrição dos dados estatísticos da base para a interface, retorna percentual de correção, quantidade de registros corrigidos, e total de registros
 async function retornaEstatisticas() {
     const api = `${host}:${porta}`
     const url = `http://${api}/criarEstatisticas/`
@@ -54,6 +56,7 @@ async function retornaEstatisticas() {
 // GERADOR DE CONSULTAS PARA FILTROS
 function selecaoDeFiltros(colunas = []) {
 
+    // Recebe todos os elementos e seus devidos slots como constantes para uso no código.
     const filtros = document.getElementsByName("filtro")
     const operadores = document.getElementsByName("operador")
     const condicoes = document.getElementsByName("condicao")
@@ -61,12 +64,12 @@ function selecaoDeFiltros(colunas = []) {
     if (condicoes == '') {
 
     }
-
+    // inicializa variável que vai armazenar os tipos de dados de cada filtro para saber se utiliza operador numérico ou de texto.
     var colxtipo = []
-
+    
     var query = `SELECT * FROM ${tabela} WHERE `
 
-
+    //Monta o vetor de filtros na tela armazenando seu nome e tipo de dados
     for (var i = 0; i < filtros.length; i++) {
         for (var j = 0; j < colunas.length; j++) {
             if (filtros[i].options[filtros[i].selectedIndex].value == colunas[j].column_name) {
@@ -77,7 +80,7 @@ function selecaoDeFiltros(colunas = []) {
             }
         }
     }
-
+    //Se o filtro for único e possuir tipo de texto será aplicado ILIKE senão utiliza condição padrão para filtro numérico
     if (colxtipo.length == 1) {
 
         if (deParaOperador(operadores[0].value) == "ILIKE") {
@@ -90,9 +93,11 @@ function selecaoDeFiltros(colunas = []) {
 
     } else {
 
-
+        //Para mais de um filtro, i vai loopar até a quantidade de filtros que foi montado no colxtipo no laço acima;
         for (let i = 0; i < colxtipo.length; i++) {
             if (i == 0) {
+                // O primeiro filtro sempre receberá valores fixos.
+                // foi montada a query usando %25 por ser o código de encoding do '%', passar ele só como '%' não funciona por que da erro no processamento do link.
                 if (deParaOperador(operadores[i].value) == "ILIKE") {
                     query += `${colxtipo[0].filtro} ` + deParaOperador(operadores[0].value) + " '%25" + deParaTipo(colxtipo[0].tipo, condicoes[0].value + "%25'", true)
                 } else {
@@ -100,6 +105,9 @@ function selecaoDeFiltros(colunas = []) {
                 }
 
             } else {
+                //Caso ele não seja o primeiro filtro, a query receberá uma estrutura que seja possível "cumular" vários filtros na consulta.
+                // Os métodos "dePara[...]" servem para fazer um switch case transformando a operação do filtro de "Maior" para ">" para que seja aplicado na consulta.
+                // O mesmo é aplicado para saber quando é "Contem" e "Igual" , pois precisavamos aplicar "="; "ILIKE" nas situações.
 
                 query += ` AND ${colxtipo[i].filtro} ` + deParaOperador(operadores[i].value)
 
@@ -114,7 +122,7 @@ function selecaoDeFiltros(colunas = []) {
 
 
 
-
+    //Método xhttp em todo o projeto chama o executar de request do node para receber ou aplicar dados através da API, neste caso, está buscando os dados passando os parâmetros :query/:key
     const api = `${host}:${porta}`
     const url = "http://" + api + "/buscarFiltro/" + query + "/" + key
 
@@ -137,6 +145,7 @@ function selecaoDeFiltros(colunas = []) {
 
 }
 
+// deParaOperador serve para converter a operação da interface de "Maior" para ">" para ser utilizado na query.
 function deParaOperador(operadorId) {
     switch (operadorId) {
         case "0":
@@ -155,6 +164,8 @@ function deParaOperador(operadorId) {
     }
 
 }
+
+// deParaTipo serve para identificar o tipo de caracter e aplicar adequadamente o tipo de operação, nesse caso, foi usado para aplicar 'ILIKE' ou '=' nas queries de texto.
 
 function deParaTipo(tipoNome, condicao, like) {
     if (like == true) {
@@ -186,7 +197,9 @@ function deParaTipo(tipoNome, condicao, like) {
 
 
 
-
+//Método que monta o GEOJSONData, é um auxiliar que recebe um vetor global de pessoas criado pelos métodos de busca da API e monta os 
+//pontos dentro de um JSON nomeado de "FeatureCollection", caso haja necessidade de entender uma 'FC' ler a API do OpenLayers 
+//no que diz a respeito sobre FeactureCollections
 function loadGeoJSONData() {
     const features = pessoas.map(pessoa => montaPontosLatLong(pessoa))
     return ({
@@ -421,7 +434,7 @@ function adicionaPontoCalor() {
 
 
 
-
+    //Adiciona a camada de FeactureCollections (que são os pontos e as latitudes /longitudes) em cima da camada de visualização do mapa.
     const layerGroup = new ol.layer.Group({
         layers: [
             heatMapPontosCalor
@@ -445,7 +458,7 @@ function adicionaPontoCalor() {
 
 
 
-
+//Executa a função no momento que o DOM é carregado.
 async function init() {
     retornaEstatisticas()
     await retornaColunas("select0")
