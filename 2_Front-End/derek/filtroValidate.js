@@ -1,3 +1,5 @@
+//Parte do JS que trata o front-end lidando com a questrão dos filtros.
+
 var colunas_global = []
 var contador = 1
 
@@ -13,7 +15,7 @@ function filtroDinamico(colunas = [], selectAlvo) {
 
 }
 
-
+//Função utilizada para criar novos objetos containerizados para a interface que respondam como selects de filtros e se posicionem abaixo do primeiro filtro da página.
 function adicionarFiltro() {
 
     var linha = document.createElement("div");
@@ -94,7 +96,7 @@ function adicionarFiltro() {
     //alert(filtro.id)
     filtroDinamico(colunas_global, filtro.id);
 }
-
+//Função que se dispõe de filtros criados na tela em tempo de execução.
 function removerFiltro() {
     if (contador > 1) {
         contador--;
